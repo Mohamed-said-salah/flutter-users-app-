@@ -1,6 +1,56 @@
 # Flutter Users App
 
-A Flutter application that displays users from a mock API using Clean Architecture principles. The app demonstrates pagination, caching, and modern Flutter development practices.
+A Flutter application that demonstrates infinite scrolling pagination using the reqres.in API.
+
+## Packages Used
+
+- **flutter_bloc**: For state management
+- **dartz**: For functional programming and error handling
+- **get_it**: For dependency injection
+- **injectable**: For dependency injection code generation
+- **infinite_scroll_pagination**: For implementing infinite scrolling pagination
+- **freezed**: For immutable data classes
+- **json_annotation**: For JSON serialization
+- **json_serializable**: For JSON serialization code generation
+- **dio**: For HTTP requests
+- **equatable**: For value equality
+
+## Application Flow
+
+1. **Data Layer**:
+   - Uses reqres.in API to fetch user data
+   - Implements repository pattern with data sources
+   - Handles data models and entities
+
+2. **Domain Layer**:
+   - Contains business logic
+   - Defines use cases (GetUsers)
+   - Uses entities for business objects
+
+3. **Presentation Layer**:
+   - Implements BLoC pattern for state management
+   - Uses infinite scrolling pagination
+   - Features:
+     - User list with infinite scroll
+     - Pull-to-refresh functionality
+     - Error handling with retry option
+     - User detail view
+     - Loading indicators for first page and new pages
+
+## Pagination Implementation
+
+The app uses `infinite_scroll_pagination` package to implement pagination:
+- Fetches 6 users per page
+- Automatically loads next page when scrolling
+- Handles loading states and errors
+- Supports pull-to-refresh
+
+## Getting Started
+
+1. Clone the repository
+2. Run `flutter pub get` to install dependencies
+3. Run `flutter pub run build_runner build` to generate code
+4. Run the app using `flutter run`
 
 ## Features
 
@@ -52,50 +102,6 @@ The app uses the [reqres.in](https://reqres.in) mock API:
 
 - **Get Users**: `GET https://reqres.in/api/users?page={page}`
 - **Get User by ID**: `GET https://reqres.in/api/users/{id}`
-
-## Getting Started
-
-### Prerequisites
-
-- Flutter SDK (3.0.0 or higher)
-- Dart SDK (2.17.0 or higher)
-- Android Studio / VS Code with Flutter extensions
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd flutter_users_app
-   ```
-
-2. **Install dependencies**
-   ```bash
-   flutter pub get
-   ```
-
-3. **Generate code**
-   ```bash
-   flutter packages pub run build_runner build
-   ```
-
-4. **Run the app**
-   ```bash
-   flutter run
-   ```
-
-### Code Generation
-
-This project uses code generation for:
-- Freezed data classes
-- JSON serialization
-- Retrofit API services
-- Injectable dependency injection
-
-To regenerate code after making changes:
-```bash
-flutter packages pub run build_runner build --delete-conflicting-outputs
-```
 
 ## Project Structure Details
 
