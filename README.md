@@ -37,13 +37,28 @@ A Flutter application that demonstrates infinite scrolling pagination using the 
      - User detail view
      - Loading indicators for first page and new pages
 
-## Pagination Implementation
+## Infinite Scroll Pagination Implementation
 
-The app uses `infinite_scroll_pagination` package to implement pagination:
-- Fetches 6 users per page
-- Automatically loads next page when scrolling
-- Handles loading states and errors
-- Supports pull-to-refresh
+The app uses `infinite_scroll_pagination` package to implement efficient pagination:
+
+### Key Features
+- **Automatic Loading**: Automatically loads the next page when user scrolls near the bottom
+- **Page Size**: Fetches 6 users per page from the API
+- **State Management**: 
+  - Shows loading indicator for first page
+  - Shows loading indicator for new pages
+  - Handles empty states
+  - Handles error states with retry option
+- **Pull to Refresh**: Supports refreshing the entire list
+- **Memory Efficient**: Only keeps necessary pages in memory
+- **Smooth Scrolling**: Maintains smooth scrolling performance
+
+### Implementation Details
+- Uses `PagingController` to manage pagination state
+- Implements `PagedListView` for efficient list rendering
+- Handles page loading through `PagedChildBuilderDelegate`
+- Supports error states with retry functionality
+- Manages loading states for both first page and subsequent pages
 
 ## Getting Started
 
