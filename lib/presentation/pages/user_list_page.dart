@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import '../../domain/entities/user.dart';
 import '../../domain/usecases/get_users.dart';
-import '../../data/models/user_model.dart';
 import '../widgets/user_card.dart';
 import 'user_detail_page.dart';
 
@@ -37,17 +36,20 @@ class _UserListPageState extends State<UserListPage> {
           _pagingController.error = failure.toString();
         },
         (response) {
-          print('Fetching page $pageKey of ${response.totalPages}');
           final isLastPage = pageKey >= response.totalPages;
-          print('Is last page: $isLastPage');
-
-          final users = response.data.map((user) => user.toEntity()).toList();
+          final users = response.data
+              .map((user) => User(
+                    id: user.id,
+                    email: user.email,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    avatar: user.avatar,
+                  ))
+              .toList();
 
           if (isLastPage) {
-            print('Appending last page with ${users.length} users');
             _pagingController.appendLastPage(users);
           } else {
-            print('Appending page $pageKey with ${users.length} users');
             _pagingController.appendPage(users, pageKey + 1);
           }
         },

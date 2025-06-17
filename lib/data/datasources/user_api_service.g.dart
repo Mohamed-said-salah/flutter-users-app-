@@ -34,7 +34,7 @@ class _UserApiService implements UserApiService {
     )
         .compose(
           _dio.options,
-          'users',
+          '/api/users',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -67,7 +67,7 @@ class _UserApiService implements UserApiService {
     )
         .compose(
           _dio.options,
-          'users/${id}',
+          '/api/users/${id}',
           queryParameters: queryParameters,
           data: _data,
         )

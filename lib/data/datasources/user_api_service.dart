@@ -12,12 +12,12 @@ abstract class UserApiService {
   factory UserApiService(Dio dio,
       {String? baseUrl, ParseErrorLogger? errorLogger}) = _UserApiService;
 
-  @GET('users')
+  @GET('/api/users')
   Future<UsersResponse> getUsers(
     @Query('page') int page,
   );
 
-  @GET('users/{id}')
+  @GET('/api/users/{id}')
   Future<SingleUserResponse> getUserById(
     @Path('id') int id,
   );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/di/injection_container.dart' as di;
+import 'presentation/bloc/user_list/user_list_bloc.dart';
 import 'presentation/pages/user_list_page.dart';
 
 void main() async {
@@ -15,7 +17,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Users App',
-      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         useMaterial3: true,
@@ -25,8 +26,9 @@ class MyApp extends StatelessWidget {
           elevation: 2,
         ),
       ),
-      home: UserListPage(
-        getUsers: di.sl(),
+      home: BlocProvider(
+        create: (context) => di.sl<UserListBloc>(),
+        child: UserListPage(getUsers: di.sl()),
       ),
     );
   }
